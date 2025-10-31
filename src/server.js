@@ -13,6 +13,21 @@ const BETTING_DURATION = parseInt(process.env.BETTING_DURATION) || 19000; // 19 
 const ROUND_DURATION = parseInt(process.env.ROUND_DURATION) || 30000; // 30 seconds
 const ROUND_GAP = parseInt(process.env.ROUND_GAP) || 5000; // 5 seconds between rounds
 
+// Get base URL for video streaming - works on both localhost and Railway
+const getBaseURL = () => {
+  if (process.env.RAILWAY_STATIC_URL) {
+    return `https://${process.env.RAILWAY_STATIC_URL}`;
+  }
+  if (process.env.RAILWAY_PUBLIC_DOMAIN) {
+    return `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`;
+  }
+  // Fallback to localhost for development
+  return `http://localhost:${PORT}`;
+};
+
+const BASE_URL = getBaseURL();
+console.log(`Base URL: ${BASE_URL}`);
+
 console.log('=== M2 BGame Server Starting ===');
 console.log(`Video Directory: ${VIDEO_DIR}`);
 console.log(`WebSocket Port: ${WS_PORT}`);
@@ -180,7 +195,7 @@ function startNewRound() {
   broadcast({
     type: 'game_start',
     videoName: randomVideo,
-    videoUrl: `http://localhost:${HTTP_PORT}/video/${encodeURIComponent(randomVideo)}`,
+    videoUrl: `${BASE_URL}/video/${encodeURIComponent(randomVideo)}`,
     startTime: gameState.startTime,
     serverTime: Date.now(),
     roundNumber: gameState.roundNumber
@@ -280,7 +295,7 @@ wss.on('connection', (ws, req) => {
     ws.send(JSON.stringify({
       type: 'game_sync',
       videoName: gameState.videoName,
-      videoUrl: `http://localhost:${HTTP_PORT}/video/${encodeURIComponent(gameState.videoName)}`,
+      videoUrl: `${BASE_URL}/video/${encodeURIComponent(gameState.videoName)}`,
       startTime: gameState.startTime,
       elapsed: elapsed,
       bettingOpen: gameState.bettingOpen,
