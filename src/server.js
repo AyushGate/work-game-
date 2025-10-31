@@ -4,9 +4,10 @@ const path = require('path');
 const http = require('http');
 const url = require('url');
 
-// Configuration
-const WS_PORT = process.env.WS_PORT || 8080;
-const HTTP_PORT = process.env.HTTP_PORT || 8081;
+// Configuration - Railway uses single PORT for both HTTP and WebSocket
+const PORT = process.env.PORT || 8080; // Railway provides this
+const WS_PORT = PORT; // Use same port for WebSocket
+const HTTP_PORT = PORT; // Use same port for HTTP
 const VIDEO_DIR = process.env.VIDEO_DIR || path.join(__dirname, '../videos');
 const BETTING_DURATION = parseInt(process.env.BETTING_DURATION) || 19000; // 19 seconds
 const ROUND_DURATION = parseInt(process.env.ROUND_DURATION) || 30000; // 30 seconds
@@ -114,12 +115,12 @@ const httpServer = http.createServer((req, res) => {
   }
 });
 
-httpServer.listen(HTTP_PORT, () => {
-  console.log(`✓ HTTP server running on http://localhost:${HTTP_PORT}`);
+httpServer.listen(PORT, '0.0.0.0', () => {
+  console.log(`✓ HTTP server running on port ${PORT}`);
 });
 
-// WebSocket server
-const wss = new WebSocket.Server({ port: WS_PORT });
+// WebSocket server - attach to HTTP server (same port)
+const wss = new WebSocket.Server({ server: httpServer });
 
 // Game state
 let gameState = {
@@ -347,7 +348,7 @@ wss.on('error', (error) => {
   console.error('WebSocket Server error:', error);
 });
 
-console.log(`✓ WebSocket server running on ws://localhost:${WS_PORT}`);
+console.log(`✓ WebSocket server running on port ${PORT}`);
 console.log('\n=== Server Ready ===');
 console.log('Waiting 3 seconds before starting first round...\n');
 
