@@ -1,0 +1,51 @@
+====================================
+  Git LFS Setup Complete! ✅
+====================================
+
+Git LFS (Large File Storage) is now configured
+to handle your video files.
+
+====================================
+
+🚀 NOW PUSH TO GITHUB:
+====================================
+
+Step 1: Create GitHub Repo (if not done)
+-----------------------------------------
+https://github.com/new
+Name: m2-bgame
+
+
+Step 2: Push with LFS Support
+------------------------------
+cd "/Volumes/Ayush Data/M2 BGame/git-upload"
+
+git remote add origin https://github.com/YOUR_USERNAME/m2-bgame.git
+git push -u origin main
+
+(Replace YOUR_USERNAME!)
+
+Videos will upload via Git LFS automatically!
+
+====================================
+
+What is Git LFS?
+----------------
+Git LFS handles large files (like videos) efficiently.
+Instead of storing the actual file in Git, it stores
+a pointer and uploads the file separately.
+
+Benefits:
+✓ No 100MB file limit
+✓ Faster git operations
+✓ Better performance
+
+====================================
+
+If Push Still Fails:
+--------------------
+Use Option 2 (Deploy without videos)
+Host videos on Cloudinary or AWS S3
+
+====================================
+

@@ -1,0 +1,37 @@
+{
+  "name": "m2-bgame",
+  "version": "1.0.0",
+  "description": "Real-time synchronized video streaming game with betting system",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "build": "echo 'No build step needed'",
+    "build:zip": "npm run build && cd dist && zip -r ../m2-bgame-build.zip . && cd ..",
+    "test": "echo \"Server will start on ports 8080 (WS) and 8081 (HTTP)\" && npm start",
+    "clean": "rm -rf dist node_modules package-lock.json",
+    "setup": "npm install && mkdir -p videos && echo \"Setup complete! Add your video files to the 'videos' folder.\"",
+    "logs": "tail -f server.log"
+  },
+  "keywords": [
+    "websocket",
+    "video",
+    "streaming",
+    "betting",
+    "game",
+    "real-time",
+    "synchronized"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}

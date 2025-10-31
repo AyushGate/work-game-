@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M2 BGame - Live Betting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 M2 BGame</h1>
+            <div class="status" id="connectionStatus">Connecting...</div>
+            <div class="round-info" id="roundInfo"></div>
+        </div>
+
+        <div class="video-container">
+            <video id="videoPlayer" autoplay muted playsinline controls></video>
+            <div class="video-overlay" id="videoOverlay">
+                <div class="loading-spinner"></div>
+                <div>Waiting for stream...</div>
+            </div>
+            <div class="video-info" id="videoInfo" style="display: none;">
+                <div id="videoName">Video: Loading...</div>
+                <div id="syncInfo">Sync: Checking...</div>
+            </div>
+            <div class="timer" id="bettingTimer" style="display: none;">
+                BETTING OPEN: 19s
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div class="betting-section">
+            <h2>Place Your Bet</h2>
+            <div class="bet-options">
+                <button class="bet-btn red" onclick="placeBet('red')" id="bet-red">
+                    <span class="btn-icon">🔴</span>
+                    <span>Red</span>
+                </button>
+                <button class="bet-btn blue" onclick="placeBet('blue')" id="bet-blue">
+                    <span class="btn-icon">🔵</span>
+                    <span>Blue</span>
+                </button>
+                <button class="bet-btn green" onclick="placeBet('green')" id="bet-green">
+                    <span class="btn-icon">🟢</span>
+                    <span>Green</span>
+                </button>
+                <button class="bet-btn yellow" onclick="placeBet('yellow')" id="bet-yellow">
+                    <span class="btn-icon">🟡</span>
+                    <span>Yellow</span>
+                </button>
+                <button class="bet-btn black" onclick="placeBet('black')" id="bet-black">
+                    <span class="btn-icon">⚫</span>
+                    <span>Black</span>
+                </button>
+                <button class="bet-btn white" onclick="placeBet('white')" id="bet-white">
+                    <span class="btn-icon">⚪</span>
+                    <span>White</span>
+                </button>
+            </div>
+            <div class="bet-status" id="betStatus"></div>
+        </div>
+
+        <div class="logs-section">
+            <div class="logs-header">
+                <h3>Activity Log</h3>
+                <button class="clear-logs-btn" onclick="clearLogs()">Clear</button>
+            </div>
+            <div class="logs" id="logs">
+                <div class="log-entry info">Connecting to server...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
